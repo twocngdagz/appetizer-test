@@ -21,6 +21,8 @@ class CreatePassersTable extends Migration
             $table->string('division');
             $table->timestamps();
         });
+
+        DB::statement('ALTER TABLE passers ADD FULLTEXT fulltext_index (name, school, division)');
     }
 
     /**
