@@ -15,8 +15,14 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+import Passers from "./components/Passers.vue"
+import PortalVue from 'portal-vue'
+
+Vue.use(PortalVue)
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: {
+        Passers
+    }
 });
