@@ -16,7 +16,6 @@
                 .then((response) => {
                     this.response = response.data
                     this.loading = false
-                    console.log(this.response)
                 })
                 .catch((error) => {
                     throw new Error(`Error fetching ${error}`)
