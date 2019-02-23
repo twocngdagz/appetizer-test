@@ -35,7 +35,14 @@ class Paginate
 
         $this->total = $builder->count();
 
-        $this->data = $builder->latest()->skip($offset)->take($limit)->get();
+        if (request()->has('order') && request()->has('direction')) {
+            $column = request()->get('order');
+            $direction = request()->get('direction');
+
+            $this->data = $builder->orderBy($column, $direction)->skip($offset)->take($limit)->get();
+        } else {
+            $this->data = $builder->latest()->skip($offset)->take($limit)->get();
+        }
     }
 
     /**
