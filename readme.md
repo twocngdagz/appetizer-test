@@ -34,3 +34,9 @@ Installing front end dependencies requires `npm`.
 ```
 npm install
 ```
+
+To build assets run:
+
+```bash
+npm run dev
+```
