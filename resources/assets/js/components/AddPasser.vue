@@ -1,46 +1,45 @@
 <template>
     <div class="max-w-sm mx-auto">
         <div class="card">
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation mb-4" novalidate>
                 <div class="form-row">
                     <div class="col-md-12 mb-3">
-                        <label for="passer-name">Name</label>
                         <input type="text" class="form-control md:uppercase" v-model="name" @input="$v.name.$touch" :class="{'is-invalid': $v.name.$error}" id="passer-name" placeholder="Name">
-                        <div class="valid-feedback">
-                            Looks good!
+                        <div class="invalid-feedback" v-if="$v.name.$error">
+                            This field is required
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-12 mb-3">
-                        <label for="passer-school">School</label>
                         <input type="text" class="form-control md:uppercase" v-model="school" @input="$v.school.$touch" :class="{'is-invalid': $v.school.$error}" id="passer-school" placeholder="School">
-                        <div class="valid-feedback">
-                            Looks good!
+                        <div class="invalid-feedback" v-if="$v.school.$error">
+                            This field is required
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-12 mb-3">
-                        <label for="passer-campus">Campus</label>
                         <input type="text" class="form-control md:uppercase" v-model="campus" @input="$v.campus.$touch" :class="{'is-invalid': $v.campus.$error}" id="passer-campus" placeholder="Campus">
-                        <div class="valid-feedback">
-                            Looks good!
+                        <div class="invalid-feedback" v-if="$v.campus.$error">
+                            This field is required
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-12 mb-3">
-                        <label for="passer-division">Division</label>
                         <input type="text" class="form-control md:uppercase" v-model="division" @input="$v.division.$touch" :class="{'is-invalid': $v.division.$error}" id="passer-division" placeholder="Division">
-                        <div class="valid-feedback">
-                            Looks good!
+                        <div class="invalid-feedback" v-if="$v.division.$error">
+                            This field is required
                         </div>
                     </div>
                 </div>
                 <button class="btn btn-primary" type="submit" @click.prevent="submit">Submit form</button>
                 <router-link :to="{ name: 'home'}" class="btn btn-danger">Back</router-link>
             </form>
+            <div class="alert alert-success" role="alert" v-if="success">
+                You have successfully added a passer! <a href="#" class="alert-link">Go Back Now</a>.
+            </div>
         </div>
     </div>
 </template>
@@ -55,12 +54,12 @@
                 name: "",
                 school: "",
                 campus: "",
-                division: ""
+                division: "",
+                success: false
             }
         },
         methods: {
             submit() {
-                console.log(this.valid)
                 if (this.valid) {
                     axios.post('/api/passers', {
                         passer: {
@@ -71,7 +70,11 @@
                         }
                     }).then(response => {
                         if (response.status == 200 && response.data.passer.id) {
-                            this.$router.push({name: 'home'})
+                            this.success = true
+                            setTimeout(() => {
+                                this.clearFields()
+                                this.$router.push({name: 'home'})
+                            }, 3000)
                         }
                     })
                     .catch((error) => {
@@ -84,8 +87,11 @@
                     this.$v.division.$touch()
                 }
             },
-            toUpperCase(e) {
-
+            clearFields() {
+                this.name = ""
+                this.school = ""
+                this.campus = ""
+                this.division = ""
             }
         },
         computed: {
