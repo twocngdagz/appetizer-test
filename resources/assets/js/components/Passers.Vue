@@ -5,6 +5,9 @@
                 <div>
                     <div class="container">
                         <div class="flex justify-between mb-2">
+                            <router-link :to="{ name: 'addpasser'}">Add Entry</router-link>
+                            <router-link :to="{ name: 'summary'}">Summary</router-link>
+
                             <label>Show
                                 <select v-model="limit">
                                     <option value="50">50</option>

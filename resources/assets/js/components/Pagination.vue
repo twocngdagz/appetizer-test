@@ -1,6 +1,6 @@
 <template>
     <nav aria-label="Page navigation example">
-      <ul class="pagination">
+      <ul class="pagination pagination-sm">
         <li v-for="page in pages"
             :key="page"
             :class="paginationClass(page)"
