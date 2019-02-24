@@ -15,14 +15,31 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import VueRouter from 'vue-router'
 import Passers from "./components/Passers.vue"
+import AddPasser from "./components/AddPasser.vue"
+import PasserSummary from "./components/PasserSummary.vue"
 import PortalVue from 'portal-vue'
+import Vuelidate from 'vuelidate'
 
 Vue.use(PortalVue)
+Vue.use(VueRouter)
+Vue.use(Vuelidate)
+
+const routes = [
+    { path: '/', name: 'home', component: Passers },
+    { path: '/add', name: 'addpasser', component: AddPasser },
+    { path: '/summary', name: 'summary', component: PasserSummary }
+]
+
+const router = new VueRouter({
+    routes
+})
 
 const app = new Vue({
     el: '#app',
     components: {
         Passers
-    }
+    },
+    router
 });
