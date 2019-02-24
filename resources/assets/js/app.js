@@ -19,6 +19,7 @@ import VueRouter from 'vue-router'
 import Passers from "./components/Passers.vue"
 import AddPasser from "./components/AddPasser.vue"
 import PasserSummary from "./components/PasserSummary.vue"
+import NotFound from "./components/NotFound.vue"
 import PortalVue from 'portal-vue'
 import Vuelidate from 'vuelidate'
 
@@ -29,7 +30,8 @@ Vue.use(Vuelidate)
 const routes = [
     { path: '/', name: 'home', component: Passers },
     { path: '/add', name: 'addpasser', component: AddPasser },
-    { path: '/summary', name: 'summary', component: PasserSummary }
+    { path: '/summary', name: 'summary', component: PasserSummary },
+    { path: '/*', name: 'notfound', component: NotFound }
 ]
 
 const router = new VueRouter({
