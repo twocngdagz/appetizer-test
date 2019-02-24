@@ -12,8 +12,8 @@
     <body>
         <div id="app">
             <div class="min-h-screen bg-grey-darker p-8">
-                <div class="maax-w-md mx-auto">
-                    <passers></passers>
+                <div class="max-w-xl mx-auto">
+                    <router-view></router-view>
                 </div>
             </div>
         </div>

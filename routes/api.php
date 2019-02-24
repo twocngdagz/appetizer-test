@@ -20,4 +20,6 @@ Route::group(['namespace' => 'Api'], function () {
             'update', 'edit', 'show', 'destroy', 'create'
         ]
     ]);
+
+    Route::get('passers/summary', 'PasserSummaryController@index');
 });
